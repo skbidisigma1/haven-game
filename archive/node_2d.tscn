@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://4pqund3nukl7"]
+
+[ext_resource type="Script" uid="uid://bxugqnugtnuf1" path="res://archive/player.gd" id="1_wtcfe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a76v3"]
+
+[node name="Player" type="Node2D" unique_id=1221086437]
+script = ExtResource("1_wtcfe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=543947626]
+shape = SubResource("RectangleShape2D_a76v3")
+debug_color = Color(0, 0.35494906, 0.582457, 0.41960785)
+
+[node name="Gun" type="Marker2D" parent="." unique_id=66111739]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=537260204]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(1, 0, 0, 1)

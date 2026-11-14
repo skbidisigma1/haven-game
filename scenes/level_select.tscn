@@ -1,0 +1,119 @@
+[gd_scene format=3 uid="uid://c2levelselect002"]
+
+[ext_resource type="Script" path="res://scripts/level_select.gd" id="1_select"]
+
+[node name="LevelSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_select")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.1, 0.11, 0.14, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -180.0
+offset_right = 300.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 28
+alignment = 1
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "SELECT LEVEL"
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 5
+
+[node name="BtnLevel1" type="Button" parent="VBoxContainer/CenterContainer/GridContainer"]
+custom_minimum_size = Vector2(100, 56)
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Level 1"
+
+[node name="BtnLevel2" type="Button" parent="VBoxContainer/CenterContainer/GridContainer"]
+custom_minimum_size = Vector2(100, 56)
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Level 2"
+
+[node name="BtnLevel3" type="Button" parent="VBoxContainer/CenterContainer/GridContainer"]
+custom_minimum_size = Vector2(100, 56)
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Level 3"
+
+[node name="BtnLevel4" type="Button" parent="VBoxContainer/CenterContainer/GridContainer"]
+custom_minimum_size = Vector2(100, 56)
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Level 4"
+
+[node name="BtnLevel5" type="Button" parent="VBoxContainer/CenterContainer/GridContainer"]
+custom_minimum_size = Vector2(100, 56)
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Level 5"
+
+[node name="BtnLevel6" type="Button" parent="VBoxContainer/CenterContainer/GridContainer"]
+custom_minimum_size = Vector2(100, 56)
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Level 6"
+
+[node name="BtnLevel7" type="Button" parent="VBoxContainer/CenterContainer/GridContainer"]
+custom_minimum_size = Vector2(100, 56)
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Level 7"
+
+[node name="BtnLevel8" type="Button" parent="VBoxContainer/CenterContainer/GridContainer"]
+custom_minimum_size = Vector2(100, 56)
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Level 8"
+
+[node name="BtnLevel9" type="Button" parent="VBoxContainer/CenterContainer/GridContainer"]
+custom_minimum_size = Vector2(100, 56)
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Level 9"
+
+[node name="BtnLevel10" type="Button" parent="VBoxContainer/CenterContainer/GridContainer"]
+custom_minimum_size = Vector2(100, 56)
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Level 10"
+
+[node name="BtnBack" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(160, 42)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back to Main Menu"
