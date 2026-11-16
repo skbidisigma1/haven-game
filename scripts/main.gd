@@ -283,6 +283,7 @@ var levels: Array[Dictionary] = [
 ]
 
 func _ready() -> void:
+	MusicPlayer.play_build()
 	if GameState:
 		current_level_index = GameState.current_level_index
 	
@@ -360,6 +361,8 @@ func load_level(index: int) -> void:
 	ui.set_go_enabled(true)
 
 func _on_go_pressed() -> void:
+	$LaserSound.play()
+	MusicPlayer.play_go()
 	if current_state != State.PLANNING:
 		return
 	
@@ -413,6 +416,7 @@ func _evaluate_result() -> void:
 		ui.show_failure("Not all zombies were eliminated!", tries_left)
 
 func _on_edit_placements_requested() -> void:
+	MusicPlayer.play_build()
 	# Keep platform positions as-is, reset laser and target colors
 	laser_gun.clear_laser()
 	for z in active_zombies:
@@ -430,6 +434,7 @@ func _on_edit_placements_requested() -> void:
 	ui.set_go_enabled(true)
 
 func _on_reset_requested() -> void:
+	MusicPlayer.play_build()
 	# Reset platforms to initial default positions
 	tries_left = MAX_TRIES
 	ui.update_tries(tries_left, MAX_TRIES)
@@ -444,6 +449,7 @@ func _on_reset_requested() -> void:
 	_on_edit_placements_requested()
 
 func _on_next_level_requested() -> void:
+	MusicPlayer.play_build()
 	if current_level_index < levels.size() - 1:
 		current_level_index += 1
 		load_level(current_level_index)

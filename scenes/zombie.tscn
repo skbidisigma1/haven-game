@@ -1,20 +1,50 @@
-[gd_scene format=3 uid="uid://b7v2y3zombie"]
+[gd_scene format=3 uid="uid://b7v2y30ombie"]
 
-[ext_resource type="Script" path="res://scripts/target.gd" id="1_target"]
+[ext_resource type="Script" uid="uid://boavrocl3arwp" path="res://scripts/target.gd" id="1_target"]
+[ext_resource type="Texture2D" uid="uid://btux2xfo02vto" path="res://assets/sprites/New Piskel (3).png" id="2_xepks"]
+[ext_resource type="Script" uid="uid://ci2t2twfot5io" path="res://scenes/animated_sprite_2d.gd" id="3_xepks"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_zombie"]
 size = Vector2(46, 46)
 
-[node name="Zombie" type="Area2D" groups=["targets", "zombies"]]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4gx57"]
+atlas = ExtResource("2_xepks")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycv6i"]
+atlas = ExtResource("2_xepks")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pjjxt"]
+atlas = ExtResource("2_xepks")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qdek3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4gx57")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ycv6i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pjjxt")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Zombie" type="Area2D" unique_id=389309484 groups=["targets", "zombies"]]
 script = ExtResource("1_target")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1977988435]
+scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_zombie")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -23.0
-offset_top = -23.0
-offset_right = 23.0
-offset_bottom = 23.0
-mouse_filter = 2
-color = Color(0.2, 0.8, 0.2, 1)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=354494294]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_qdek3")
+frame_progress = 0.29500183
+script = ExtResource("3_xepks")

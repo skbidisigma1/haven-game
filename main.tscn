@@ -1,8 +1,11 @@
-[gd_scene format=3 uid="uid://b1m9a4mainscene"]
+[gd_scene format=3 uid="uid://yn0ebfvvxnac"]
 
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
-[ext_resource type="PackedScene" path="res://scenes/laser_gun.tscn" id="2_lasergun"]
-[ext_resource type="PackedScene" path="res://scenes/ui.tscn" id="3_ui"]
+[ext_resource type="Script" uid="uid://ctbpvy4ktsv5j" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="Texture2D" uid="uid://bg4kvgwjge3wq" path="res://assets/sprites/background-1.png (2).png" id="2_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://dx21a6biapkwj" path="res://scenes/laser_gun.tscn" id="2_lasergun"]
+[ext_resource type="Texture2D" uid="uid://cn4q2ld64io0" path="res://assets/sprites/Floor-1.png (1).png" id="3_lquwl"]
+[ext_resource type="PackedScene" uid="uid://b3v4yagameui" path="res://scenes/ui.tscn" id="3_ui"]
+[ext_resource type="AudioStream" uid="uid://6qeup1lm48hm" path="res://assets/se_brvmpyu5s5lglmte.wav" id="6_7mycd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_top"]
 size = Vector2(1152, 12)
@@ -16,55 +19,64 @@ size = Vector2(12, 576)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_right"]
 size = Vector2(12, 576)
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" unique_id=382363812]
 script = ExtResource("1_main")
 
-[node name="Background" type="ColorRect" parent="."]
-offset_right = 1152.0
-offset_bottom = 648.0
-mouse_filter = 2
-color = Color(0.06, 0.07, 0.09, 1)
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1973431374]
+offset_left = 2.0
+offset_top = 68.0
+offset_right = 1282.0
+offset_bottom = 788.0
+scale = Vector2(0.8905738, 0.8080299)
+texture = ExtResource("2_1bvp3")
 
-[node name="ArenaWalls" type="StaticBody2D" parent="." groups=["walls"]]
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=2034815573]
+offset_left = 10.0
+offset_top = 136.0
+offset_right = 1162.0
+offset_bottom = 784.0
+texture = ExtResource("3_lquwl")
 
-[node name="CollisionTop" type="CollisionShape2D" parent="ArenaWalls"]
+[node name="ArenaWalls" type="StaticBody2D" parent="." unique_id=303721762 groups=["walls"]]
+
+[node name="CollisionTop" type="CollisionShape2D" parent="ArenaWalls" unique_id=1098961106]
 position = Vector2(576, 70)
 shape = SubResource("RectangleShape2D_wall_top")
 
-[node name="CollisionBottom" type="CollisionShape2D" parent="ArenaWalls"]
+[node name="CollisionBottom" type="CollisionShape2D" parent="ArenaWalls" unique_id=1979771079]
 position = Vector2(576, 642)
 shape = SubResource("RectangleShape2D_wall_bottom")
 
-[node name="CollisionLeft" type="CollisionShape2D" parent="ArenaWalls"]
+[node name="CollisionLeft" type="CollisionShape2D" parent="ArenaWalls" unique_id=1205224844]
 position = Vector2(6, 356)
 shape = SubResource("RectangleShape2D_wall_left")
 
-[node name="CollisionRight" type="CollisionShape2D" parent="ArenaWalls"]
+[node name="CollisionRight" type="CollisionShape2D" parent="ArenaWalls" unique_id=1312092954]
 position = Vector2(1146, 356)
 shape = SubResource("RectangleShape2D_wall_right")
 
-[node name="VisualTop" type="ColorRect" parent="ArenaWalls"]
+[node name="VisualTop" type="ColorRect" parent="ArenaWalls" unique_id=1288776012]
 offset_top = 64.0
 offset_right = 1152.0
 offset_bottom = 74.0
 mouse_filter = 2
 color = Color(0.18, 0.22, 0.28, 1)
 
-[node name="VisualBottom" type="ColorRect" parent="ArenaWalls"]
+[node name="VisualBottom" type="ColorRect" parent="ArenaWalls" unique_id=1744039319]
 offset_top = 638.0
 offset_right = 1152.0
 offset_bottom = 648.0
 mouse_filter = 2
 color = Color(0.18, 0.22, 0.28, 1)
 
-[node name="VisualLeft" type="ColorRect" parent="ArenaWalls"]
+[node name="VisualLeft" type="ColorRect" parent="ArenaWalls" unique_id=1741778632]
 offset_top = 64.0
 offset_right = 12.0
 offset_bottom = 648.0
 mouse_filter = 2
 color = Color(0.18, 0.22, 0.28, 1)
 
-[node name="VisualRight" type="ColorRect" parent="ArenaWalls"]
+[node name="VisualRight" type="ColorRect" parent="ArenaWalls" unique_id=1424544570]
 offset_left = 1140.0
 offset_top = 64.0
 offset_right = 1152.0
@@ -72,9 +84,12 @@ offset_bottom = 648.0
 mouse_filter = 2
 color = Color(0.18, 0.22, 0.28, 1)
 
-[node name="LaserGun" parent="." instance=ExtResource("2_lasergun")]
+[node name="LaserGun" parent="." unique_id=2135135298 instance=ExtResource("2_lasergun")]
 position = Vector2(32, 160)
 
-[node name="LevelContainer" type="Node2D" parent="."]
+[node name="LevelContainer" type="Node2D" parent="." unique_id=1878292196]
 
-[node name="UI" parent="." instance=ExtResource("3_ui")]
+[node name="UI" parent="." unique_id=1721829901 instance=ExtResource("3_ui")]
+
+[node name="LaserSound" type="AudioStreamPlayer" parent="." unique_id=628946957]
+stream = ExtResource("6_7mycd")

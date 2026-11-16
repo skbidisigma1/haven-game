@@ -4,6 +4,7 @@ extends Control
 @onready var btn_back: Button = $VBoxContainer/BtnBack
 
 func _ready() -> void:
+	MusicPlayer.play_menu()
 	btn_back.pressed.connect(_on_back_pressed)
 	
 	# Connect level buttons

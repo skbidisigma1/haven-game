@@ -18,13 +18,11 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameState="*res://scripts/game_state.gd"
+MusicPlayer="*uid://cxhp8guan3gle"
 
 [display]
 
-window/size/viewport_width=1152
-window/size/viewport_height=648
 window/stretch/mode="canvas_items"
-window/stretch/aspect="keep"
 
 [physics]
 

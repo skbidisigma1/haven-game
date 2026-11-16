@@ -1,20 +1,16 @@
-[gd_scene format=3 uid="uid://e1a8m9obstacle"]
+[gd_scene format=3 uid="uid://dtix3dmhnygi1"]
 
-[ext_resource type="Script" path="res://scripts/obstacle_wall.gd" id="1_obstacle"]
+[ext_resource type="Script" uid="uid://dgmd7rxflat5b" path="res://scripts/obstacle_wall.gd" id="1_obstacle"]
+[ext_resource type="Texture2D" uid="uid://djfyal6603ypt" path="res://assets/sprites/New Piskel-1.png (5).png" id="2_kvf8b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wall"]
 size = Vector2(24, 200)
 
-[node name="ObstacleWall" type="StaticBody2D" groups=["walls"]]
+[node name="ObstacleWall" type="StaticBody2D" unique_id=1663010867 groups=["walls"]]
 script = ExtResource("1_obstacle")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1511446133]
 shape = SubResource("RectangleShape2D_wall")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -12.0
-offset_top = -100.0
-offset_right = 12.0
-offset_bottom = 100.0
-mouse_filter = 2
-color = Color(0.3, 0.3, 0.3, 1)
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=970331936]
+texture = ExtResource("2_kvf8b")

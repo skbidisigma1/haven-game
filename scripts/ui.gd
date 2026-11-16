@@ -28,6 +28,7 @@ signal level_select_requested
 @onready var btn_failure_select: Button = $FailurePanel/Panel/VBoxContainer/BtnSelect
 
 func _ready() -> void:
+	MusicPlayer.play_go()
 	hide_menus()
 	btn_go.pressed.connect(func(): go_pressed.emit())
 	btn_reset.pressed.connect(func(): reset_requested.emit())

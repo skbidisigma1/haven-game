@@ -43,9 +43,9 @@ Strategically place and rotate reflective mirror platforms to redirect a laser b
 │   ├── main_menu.gd        # Main menu transition
 │   └── level_select.gd     # Level grid selection logic
 └── assets/                 # (Ready for custom art & audio)
-    ├── sprites/            # Place your 2D PNG sprites here
-    ├── audio/              # Place your sound effect files (.wav) here
-    └── music/              # Place your background music tracks (.ogg) here
+	├── sprites/            # Place your 2D PNG sprites here
+	├── audio/              # Place your sound effect files (.wav) here
+	└── music/              # Place your background music tracks (.ogg) here
 ```
 
 ---
@@ -100,13 +100,13 @@ The game currently uses solid-colored prototype rectangles so that the core mech
 All 10 levels are defined in `scripts/main.gd` in the `levels` array. Each level is a simple dictionary:
 ```gdscript
 {
-    "name": "Level Name",
-    "gun_pos": Vector2(32, 160),
-    "gun_rot": 0.0,
-    "platforms": [ {"pos": Vector2(300, 320), "rot": 0.0} ],
-    "zombies": [ Vector2(750, 480) ],
-    "humanoids": [ Vector2(500, 160) ],
-    "walls": [ {"pos": Vector2(500, 300), "size": Vector2(24, 200)} ]
+	"name": "Level Name",
+	"gun_pos": Vector2(32, 160),
+	"gun_rot": 0.0,
+	"platforms": [ {"pos": Vector2(300, 320), "rot": 0.0} ],
+	"zombies": [ Vector2(750, 480) ],
+	"humanoids": [ Vector2(500, 160) ],
+	"walls": [ {"pos": Vector2(500, 300), "size": Vector2(24, 200)} ]
 }
 ```
 To create new levels or tweak obstacle positions, simply edit or append to this array!
