@@ -104,7 +104,7 @@ var levels: Array[Dictionary] = [
 		],
 		"humanoids": [
 			Vector2(920, 160),
-			Vector2(540, 520)
+			Vector2(320, 320)
 		],
 		"walls": [
 			{"pos": Vector2(540, 300), "size": Vector2(24, 240)},
@@ -119,8 +119,9 @@ var levels: Array[Dictionary] = [
 		"gun_rot": 0.0,
 		"platforms": [
 			{"pos": Vector2(240, 320), "rot": 0.0},
-			{"pos": Vector2(500, 320), "rot": 0.0},
-			{"pos": Vector2(760, 320), "rot": 0.0}
+			{"pos": Vector2(520, 320), "rot": 0.0},
+			{"pos": Vector2(800, 320), "rot": 0.0},
+			{"pos": Vector2(520, 500), "rot": 0.0}
 		],
 		"zombies": [
 			Vector2(262, 340),
@@ -128,8 +129,8 @@ var levels: Array[Dictionary] = [
 			Vector2(880, 260)
 		],
 		"humanoids": [
-			Vector2(580, 160),
-			Vector2(520, 220)
+			Vector2(520, 160),
+			Vector2(720, 160)
 		],
 		"walls": [
 			{"pos": Vector2(420, 300), "size": Vector2(24, 240)},

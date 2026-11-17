@@ -60,6 +60,7 @@ width = 3.0
 default_color = Color(1, 0.15, 0.15, 1)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1670293218]
+position = Vector2(0, 5.9604645e-08)
+scale = Vector2(1.2, 1.2)
 sprite_frames = SubResource("SpriteFrames_qdek3")
-frame_progress = 0.23648441
 script = ExtResource("3_1nrhr")
