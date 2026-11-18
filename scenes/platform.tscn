@@ -1,16 +1,10 @@
-[gd_scene format=3 uid="uid://b2oj2tk4qbqje"]
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/platform.gd" id="1"]
+[sub_resource type="SegmentShape2D" id="Shape"]
+a = Vector2(-48, 0)
+b = Vector2(48, 0)
+[node name="Platform" type="StaticBody2D"]
+script = ExtResource("1")
 
-[ext_resource type="Script" uid="uid://bxml332qxjpdk" path="res://scripts/platform.gd" id="1_platform"]
-[ext_resource type="Texture2D" uid="uid://c3ls4dcb5tocq" path="res://assets/sprites/New Piskel-1.png (1).png" id="2_nlgqw"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform"]
-size = Vector2(130, 24)
-
-[node name="Platform" type="AnimatableBody2D" unique_id=267372746 groups=["reflectors"]]
-script = ExtResource("1_platform")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1148956402]
-shape = SubResource("RectangleShape2D_platform")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1611646562]
-texture = ExtResource("2_nlgqw")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("Shape")

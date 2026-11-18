@@ -1,16 +1,9 @@
-[gd_scene format=3 uid="uid://dtix3dmhnygi1"]
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/obstacle_wall.gd" id="1"]
+[sub_resource type="RectangleShape2D" id="Shape"]
+size = Vector2(40, 40)
+[node name="Obstacle_Wall" type="StaticBody2D"]
+script = ExtResource("1")
 
-[ext_resource type="Script" uid="uid://dgmd7rxflat5b" path="res://scripts/obstacle_wall.gd" id="1_obstacle"]
-[ext_resource type="Texture2D" uid="uid://djfyal6603ypt" path="res://assets/sprites/New Piskel-1.png (5).png" id="2_kvf8b"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall"]
-size = Vector2(24, 200)
-
-[node name="ObstacleWall" type="StaticBody2D" unique_id=1663010867 groups=["walls"]]
-script = ExtResource("1_obstacle")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1511446133]
-shape = SubResource("RectangleShape2D_wall")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=970331936]
-texture = ExtResource("2_kvf8b")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("Shape")
