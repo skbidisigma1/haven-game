@@ -1,9 +1,16 @@
-[gd_scene load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/target.gd" id="1"]
+[gd_scene format=3 uid="uid://if8870d8itlj"]
+
+[ext_resource type="Script" uid="uid://boavrocl3arwp" path="res://scripts/target.gd" id="1"]
+[ext_resource type="PackedScene" path="res://assets/CutsceneAssets/cutZombie.tscn" id="2_httt1"]
+
 [sub_resource type="RectangleShape2D" id="Shape"]
 size = Vector2(40, 40)
-[node name="Zombie" type="Area2D"]
+
+[node name="Zombie" type="Area2D" unique_id=1498304682]
 script = ExtResource("1")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1215712292]
 shape = SubResource("Shape")
+
+[node name="Zombie" parent="." unique_id=1492496078 instance=ExtResource("2_httt1")]
+position = Vector2(335, 215)

@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://ckpln1b8qn78w"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0kh7i"]
+load_path = "res://.godot/imported/CutZombie.png-f74a4aa77376feb13a7be2bcf7ad58be.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xvi6n"]
+atlas = SubResource("CompressedTexture2D_0kh7i")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6n2pr"]
+atlas = SubResource("CompressedTexture2D_0kh7i")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4yi8t"]
+atlas = SubResource("CompressedTexture2D_0kh7i")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pxlae"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xvi6n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6n2pr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4yi8t")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pxlae"]
+size = Vector2(24, 54)
+
+[node name="Area2D" type="Area2D" unique_id=1853806185]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=206137866]
+position = Vector2(0, -32)
+sprite_frames = SubResource("SpriteFrames_pxlae")
+autoplay = "default"
+frame_progress = 0.6423527
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=485387216]
+position = Vector2(-2, -27)
+shape = SubResource("RectangleShape2D_pxlae")

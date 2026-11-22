@@ -1,0 +1,256 @@
+[gd_scene format=3 uid="uid://du6aa7ttffkc2"]
+
+[ext_resource type="PackedScene" uid="uid://cw1cwgxb1txa5" path="res://assets/CutsceneAssets/Van.tscn" id="1_ae4jv"]
+[ext_resource type="Texture2D" uid="uid://w26shwf2mmsf" path="res://assets/CutsceneAssets/BackgroundParralax/Cutscene Background parrallaxback.png" id="1_t5wr7"]
+[ext_resource type="Texture2D" uid="uid://gqvhvg4huk68" path="res://assets/CutsceneAssets/BackgroundParralax/Cutscene Background parrallaxcloud3.png" id="2_q4ftq"]
+[ext_resource type="Texture2D" uid="uid://dutpebfbldi5r" path="res://assets/CutsceneAssets/BackgroundParralax/Cutscene Background parrallax-1.png (2).png" id="3_74wep"]
+[ext_resource type="Texture2D" uid="uid://bitywcgqb1oru" path="res://assets/CutsceneAssets/BackgroundParralax/Cutscene Background Cloud2.png" id="3_wo4kq"]
+[ext_resource type="Texture2D" uid="uid://bgg25t3xmcqoe" path="res://assets/CutsceneAssets/BackgroundParralax/Cutscene Background parrallaxcloud1.png" id="4_t5wr7"]
+[ext_resource type="Texture2D" uid="uid://dfmtbjllpqbnd" path="res://assets/CutsceneAssets/BackgroundParralax/Cutscene Background parrallaxhill2.png" id="6_2fhnt"]
+[ext_resource type="Texture2D" uid="uid://cfx1v7p8s62gc" path="res://assets/CutsceneAssets/BackgroundParralax/Cutscene Background road.png" id="7_73lu8"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pxlae"]
+
+[sub_resource type="Animation" id="Animation_73lu8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -87)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera2D:enabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CharacterBody2D/Camera2D:enabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Camera2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2729, -1015)]
+}
+
+[sub_resource type="Animation" id="Animation_2fhnt"]
+resource_name = "Start"
+length = 5.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody2D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.06666666, 4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [false],
+"method": &"set_physics_process"
+}, {
+"args": [true],
+"method": &"set_physics_process"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterBody2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2.8, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -87), Vector2(3000, -48)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera2D:enabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 4.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CharacterBody2D/Camera2D:enabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 4.766667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Camera2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(4, 4.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(2729, -1015), Vector2(3632, -906)]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CharacterBody2D")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(4, 4.9),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"pause_animation"
+}, {
+"args": [],
+"method": &"resume_animation"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_73lu8"]
+_data = {
+&"RESET": SubResource("Animation_73lu8"),
+&"Start": SubResource("Animation_2fhnt")
+}
+
+[node name="Cutscene" type="Node2D" unique_id=1093653990]
+
+[node name="Parallax" type="Node2D" parent="." unique_id=39008634]
+
+[node name="Parallax2D4" type="Parallax2D" parent="Parallax" unique_id=677390036]
+texture_filter = 1
+scroll_scale = Vector2(0, 1)
+scroll_offset = Vector2(0, -291)
+repeat_size = Vector2(3840, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Parallax2D4" unique_id=1417052916]
+position = Vector2(0, -249)
+texture = ExtResource("1_t5wr7")
+
+[node name="Parallax2D3" type="Parallax2D" parent="Parallax" unique_id=1494206829]
+texture_filter = 1
+scroll_scale = Vector2(0.1, 1)
+scroll_offset = Vector2(0, -291)
+repeat_size = Vector2(3840, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Parallax2D3" unique_id=182229303]
+position = Vector2(0, -249)
+texture = ExtResource("2_q4ftq")
+
+[node name="Parallax2D2" type="Parallax2D" parent="Parallax" unique_id=2087770392]
+texture_filter = 1
+scroll_scale = Vector2(0.15, 1)
+scroll_offset = Vector2(0, -291)
+repeat_size = Vector2(3840, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Parallax2D2" unique_id=1468492959]
+position = Vector2(0, -249)
+texture = ExtResource("3_wo4kq")
+
+[node name="Parallax2D" type="Parallax2D" parent="Parallax" unique_id=1097817307]
+texture_filter = 1
+scroll_scale = Vector2(0.3, 1)
+scroll_offset = Vector2(0, -291)
+repeat_size = Vector2(3840, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Parallax2D" unique_id=115278652]
+position = Vector2(0, -249)
+texture = ExtResource("4_t5wr7")
+
+[node name="Parallax2D5" type="Parallax2D" parent="Parallax" unique_id=558718473]
+texture_filter = 1
+scroll_scale = Vector2(0.4, 1)
+scroll_offset = Vector2(0, -291)
+repeat_size = Vector2(3840, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Parallax2D5" unique_id=703437445]
+position = Vector2(0, -249)
+texture = ExtResource("3_74wep")
+
+[node name="Parallax2D6" type="Parallax2D" parent="Parallax" unique_id=1523790097]
+texture_filter = 1
+scroll_scale = Vector2(0.9, 1)
+scroll_offset = Vector2(0, -291)
+repeat_size = Vector2(3840, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Parallax2D6" unique_id=1854322600]
+position = Vector2(0, -249)
+texture = ExtResource("6_2fhnt")
+
+[node name="Parallax2D7" type="Parallax2D" parent="Parallax" unique_id=1959517200]
+texture_filter = 1
+scroll_offset = Vector2(0, -291)
+repeat_size = Vector2(3840, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Parallax2D7" unique_id=1195330530]
+position = Vector2(0, -249)
+texture = ExtResource("7_73lu8")
+
+[node name="Area2D" type="StaticBody2D" parent="." unique_id=142422508]
+position = Vector2(0, -48)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=370603250]
+shape = SubResource("WorldBoundaryShape2D_pxlae")
+
+[node name="CharacterBody2D" parent="." unique_id=274974302 instance=ExtResource("1_ae4jv")]
+position = Vector2(0, -87)
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=2040944421]
+position = Vector2(633, -464)
+enabled = false
+zoom = Vector2(0.615, 0.615)
+limit_top = -1080
+limit_bottom = 0
+position_smoothing_enabled = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=87539643]
+position = Vector2(2729, -1015)
+zoom = Vector2(0.615, 0.615)
+limit_top = -1080
+limit_bottom = 0
+position_smoothing_enabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=217962534]
+libraries/ = SubResource("AnimationLibrary_73lu8")
+autoplay = &"Start"
