@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dbcr5xq0axb6u" path="res://assets/CutsceneAssets/Van.png" id="2_7ku4x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pxlae"]
-size = Vector2(431, 236)
+size = Vector2(439, 236)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_psqbt"]
 atlas = ExtResource("2_7ku4x")
@@ -47,7 +47,7 @@ script = ExtResource("1_mdunx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1077997951]
 z_index = 2
-position = Vector2(-1.5, -118)
+position = Vector2(2.5, -118)
 shape = SubResource("RectangleShape2D_pxlae")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2019357256]

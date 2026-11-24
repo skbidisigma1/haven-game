@@ -18,7 +18,7 @@ func _ready():
 func _process(delta):
 	if is_on_floor():
 		time += delta
-		animated_sprite_2d.position.y = base_y + sin(time * 3) * 10
+		animated_sprite_2d.position.y = base_y + sin(time * 3) * 12
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -31,7 +31,7 @@ func _physics_process(delta: float) -> void:
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("ui_left", "ui_right")
+	var _direction := Input.get_axis("ui_left", "ui_right")
 	velocity.x = SPEED
 
 	move_and_slide()

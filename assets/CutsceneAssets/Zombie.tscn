@@ -1,18 +1,18 @@
 [gd_scene format=3 uid="uid://ckpln1b8qn78w"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0kh7i"]
-load_path = "res://.godot/imported/CutZombie.png-f74a4aa77376feb13a7be2bcf7ad58be.ctex"
+[ext_resource type="Texture2D" uid="uid://b4r574gq7xoh0" path="res://assets/sprites/zombie.png" id="1_rt46u"]
+[ext_resource type="Script" uid="uid://col3cb3pmydxj" path="res://assets/CutsceneAssets/roadzombie.gd" id="1_xvi6n"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xvi6n"]
-atlas = SubResource("CompressedTexture2D_0kh7i")
+atlas = ExtResource("1_rt46u")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6n2pr"]
-atlas = SubResource("CompressedTexture2D_0kh7i")
+atlas = ExtResource("1_rt46u")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4yi8t"]
-atlas = SubResource("CompressedTexture2D_0kh7i")
+atlas = ExtResource("1_rt46u")
 region = Rect2(0, 64, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pxlae"]
@@ -28,21 +28,73 @@ animations = [{
 "texture": SubResource("AtlasTexture_4yi8t")
 }],
 "loop": 1,
-"name": &"default",
-"speed": 10.0
+"name": &"idle",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pxlae"]
-size = Vector2(24, 54)
+size = Vector2(60, 42)
+
+[sub_resource type="Gradient" id="Gradient_xvi6n"]
+offsets = PackedFloat32Array(0.5147783, 0.6182266, 1)
+colors = PackedColorArray(1, 0.2784314, 1, 1, 0.4862745, 0.25490198, 0.69803923, 1, 0.69411767, 0.9019608, 0.69411767, 1)
 
 [node name="Area2D" type="Area2D" unique_id=1853806185]
+script = ExtResource("1_xvi6n")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=206137866]
 position = Vector2(0, -32)
+scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_pxlae")
-autoplay = "default"
-frame_progress = 0.6423527
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.57975334
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=485387216]
-position = Vector2(-2, -27)
+position = Vector2(-12, 43)
 shape = SubResource("RectangleShape2D_pxlae")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=623442745]
+emitting = false
+amount = 45
+lifetime = 8.11
+one_shot = true
+explosiveness = 1.0
+randomness = 0.3
+lifetime_randomness = 0.3
+emission_shape = 3
+emission_rect_extents = Vector2(8, 16)
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(-1000, 980)
+initial_velocity_min = 200.0
+initial_velocity_max = 450.0
+angular_velocity_min = -360.0
+angular_velocity_max = 360.0
+scale_amount_min = 7.94
+scale_amount_max = 45.06
+color = Color(0.6967597, 0.93834263, 0.7398748, 1)
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="." unique_id=987438198]
+emitting = false
+amount = 45
+lifetime = 2.4799999999999995
+one_shot = true
+explosiveness = 1.0
+randomness = 0.3
+lifetime_randomness = 0.3
+emission_shape = 3
+emission_rect_extents = Vector2(8, 16)
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(-1000, 980)
+initial_velocity_min = 33.33
+initial_velocity_max = 350.79
+angular_velocity_min = -360.0
+angular_velocity_max = 360.0
+scale_amount_min = 4.02
+scale_amount_max = 37.6
+color = Color(0.60701245, 0.6861486, 0.54433477, 1)
+color_ramp = SubResource("Gradient_xvi6n")
+hue_variation_min = -0.56
+hue_variation_max = 0.63

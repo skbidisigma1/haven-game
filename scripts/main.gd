@@ -3,6 +3,8 @@ class_name GameManager
 
 enum State { SPAWNING, PLANNING, FIRING, RESULT }
 const MAX_TRIES := 3
+# Seconds the laser waits after the last zombie is out before it fires.
+const ZOMBIE_REVEAL_DELAY := 1.0
 const LEVEL_DATA = preload("res://scripts/levels.gd")
 const PLATFORM = preload("res://scenes/platform.tscn")
 const ZOMBIE = preload("res://scenes/zombie.tscn")
@@ -36,7 +38,6 @@ func _ready() -> void:
 
 func load_level(index: int) -> void:
 	generation += 1
-	var this_generation := generation
 	get_tree().paused = false
 	ui.paused = false
 	ui.hide_menus()
@@ -69,6 +70,7 @@ func load_level(index: int) -> void:
 		optic.can_interact = false
 		level_container.add_child(optic)
 		active_platforms.append(optic)
+	# Zombies start hidden inside their wall cracks (Target handles that itself).
 	for pos in data["zombies"]:
 		var target: Target = ZOMBIE.instantiate()
 		target.position = pos
@@ -84,9 +86,6 @@ func load_level(index: int) -> void:
 	ui.update_targets(0, active_zombies.size())
 	ui.set_go_enabled(false)
 	MusicPlayer.play_build()
-	for i in active_zombies.size(): active_zombies[i].emerge(i * 0.09)
-	if not test_mode: await get_tree().create_timer(0.6 + active_zombies.size() * 0.09, false).timeout
-	if this_generation != generation: return
 	_enter_planning()
 
 func _enter_planning() -> void:
@@ -103,12 +102,21 @@ func _on_go_pressed() -> void:
 	for optic in active_platforms:
 		optic.stop_drag()
 		optic.can_interact = false
-	$LaserSound.play()
 	MusicPlayer.play_go()
-	# Wait for the physics server to see a mirror moved on this input frame.
 	var this_generation := generation
+	# Zombies climb out of their cracks one at a time, each waiting for the one before.
+	for zombie in active_zombies:
+		if test_mode: zombie.pop_out()
+		else: await zombie.pop_out()
+		if this_generation != generation or current_state != State.FIRING: return
+	# Then the laser waits a beat before firing.
+	if not test_mode:
+		await get_tree().create_timer(ZOMBIE_REVEAL_DELAY, false).timeout
+	if this_generation != generation or current_state != State.FIRING: return
+	# Wait for the physics server to see a mirror moved on this input frame.
 	await get_tree().physics_frame
 	if this_generation != generation or current_state != State.FIRING: return
+	$LaserSound.play()
 	last_laser_data = laser_gun.fire_laser()
 
 func _on_shooting_finished(data: Dictionary) -> void:
@@ -145,6 +153,8 @@ func _on_edit_placements_requested() -> void:
 	ui.hide_menus()
 	laser_gun.clear_laser()
 	for target in active_zombies + active_humanoids: target.set_hit(false)
+	# Zombies duck back into their cracks until the next shot.
+	for target in active_zombies: target.hide_in_crack()
 	_update_targets()
 	MusicPlayer.play_build()
 	_enter_planning()

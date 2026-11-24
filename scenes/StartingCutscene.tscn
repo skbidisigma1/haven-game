@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://du6aa7ttffkc2"]
 
+[ext_resource type="Script" uid="uid://dmp2sqejckltk" path="res://scenes/starting_cutscene.gd" id="1_4pkki"]
 [ext_resource type="PackedScene" uid="uid://cw1cwgxb1txa5" path="res://assets/CutsceneAssets/Van.tscn" id="1_ae4jv"]
 [ext_resource type="Texture2D" uid="uid://w26shwf2mmsf" path="res://assets/CutsceneAssets/BackgroundParralax/Cutscene Background parrallaxback.png" id="1_t5wr7"]
 [ext_resource type="Texture2D" uid="uid://gqvhvg4huk68" path="res://assets/CutsceneAssets/BackgroundParralax/Cutscene Background parrallaxcloud3.png" id="2_q4ftq"]
@@ -8,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bgg25t3xmcqoe" path="res://assets/CutsceneAssets/BackgroundParralax/Cutscene Background parrallaxcloud1.png" id="4_t5wr7"]
 [ext_resource type="Texture2D" uid="uid://dfmtbjllpqbnd" path="res://assets/CutsceneAssets/BackgroundParralax/Cutscene Background parrallaxhill2.png" id="6_2fhnt"]
 [ext_resource type="Texture2D" uid="uid://cfx1v7p8s62gc" path="res://assets/CutsceneAssets/BackgroundParralax/Cutscene Background road.png" id="7_73lu8"]
+[ext_resource type="PackedScene" uid="uid://ckpln1b8qn78w" path="res://assets/CutsceneAssets/Zombie.tscn" id="9_73lu8"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pxlae"]
 
@@ -64,7 +66,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_2fhnt"]
 resource_name = "Start"
-length = 5.0
+length = 4.6666665
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -101,7 +103,7 @@ tracks/2/path = NodePath("Camera2D:enabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 4.9),
+"times": PackedFloat32Array(0, 4.6666665),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -113,7 +115,7 @@ tracks/3/path = NodePath("CharacterBody2D/Camera2D:enabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 4.766667),
+"times": PackedFloat32Array(0, 4.5333333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -125,7 +127,7 @@ tracks/4/path = NodePath("Camera2D:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(4, 4.9),
+"times": PackedFloat32Array(4, 4.6666665),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(2729, -1015), Vector2(3632, -906)]
@@ -137,7 +139,7 @@ tracks/5/path = NodePath("CharacterBody2D")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(4, 4.9),
+"times": PackedFloat32Array(4, 4.6666665),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
@@ -148,13 +150,32 @@ tracks/5/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_4pkki"]
+resource_name = "ZombieAttack"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"spawn_road_zombie"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_73lu8"]
 _data = {
 &"RESET": SubResource("Animation_73lu8"),
-&"Start": SubResource("Animation_2fhnt")
+&"Start": SubResource("Animation_2fhnt"),
+&"ZombieAttack": SubResource("Animation_4pkki")
 }
 
 [node name="Cutscene" type="Node2D" unique_id=1093653990]
+script = ExtResource("1_4pkki")
 
 [node name="Parallax" type="Node2D" parent="." unique_id=39008634]
 
@@ -231,6 +252,7 @@ texture = ExtResource("7_73lu8")
 position = Vector2(0, -48)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=370603250]
+position = Vector2(0, 11)
 shape = SubResource("WorldBoundaryShape2D_pxlae")
 
 [node name="CharacterBody2D" parent="." unique_id=274974302 instance=ExtResource("1_ae4jv")]
@@ -254,3 +276,7 @@ position_smoothing_enabled = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=217962534]
 libraries/ = SubResource("AnimationLibrary_73lu8")
 autoplay = &"Start"
+next/Start = &"ZombieAttack"
+
+[node name="Area2D2" parent="." unique_id=1853806185 instance=ExtResource("9_73lu8")]
+position = Vector2(3101, -114)
