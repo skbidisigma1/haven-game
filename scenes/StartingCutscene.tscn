@@ -3,15 +3,85 @@
 [ext_resource type="Script" uid="uid://dmp2sqejckltk" path="res://scenes/starting_cutscene.gd" id="1_4pkki"]
 [ext_resource type="PackedScene" uid="uid://cw1cwgxb1txa5" path="res://assets/CutsceneAssets/Van.tscn" id="1_ae4jv"]
 [ext_resource type="Texture2D" uid="uid://w26shwf2mmsf" path="res://assets/CutsceneAssets/BackgroundParralax/Cutscene Background parrallaxback.png" id="1_t5wr7"]
+[ext_resource type="Script" uid="uid://c7bnpohbanxbv" path="res://scripts/cutscene_data.gd" id="2_gdwq0"]
 [ext_resource type="Texture2D" uid="uid://gqvhvg4huk68" path="res://assets/CutsceneAssets/BackgroundParralax/Cutscene Background parrallaxcloud3.png" id="2_q4ftq"]
 [ext_resource type="Texture2D" uid="uid://dutpebfbldi5r" path="res://assets/CutsceneAssets/BackgroundParralax/Cutscene Background parrallax-1.png (2).png" id="3_74wep"]
 [ext_resource type="Texture2D" uid="uid://bitywcgqb1oru" path="res://assets/CutsceneAssets/BackgroundParralax/Cutscene Background Cloud2.png" id="3_wo4kq"]
 [ext_resource type="Texture2D" uid="uid://bgg25t3xmcqoe" path="res://assets/CutsceneAssets/BackgroundParralax/Cutscene Background parrallaxcloud1.png" id="4_t5wr7"]
 [ext_resource type="Texture2D" uid="uid://dfmtbjllpqbnd" path="res://assets/CutsceneAssets/BackgroundParralax/Cutscene Background parrallaxhill2.png" id="6_2fhnt"]
 [ext_resource type="Texture2D" uid="uid://cfx1v7p8s62gc" path="res://assets/CutsceneAssets/BackgroundParralax/Cutscene Background road.png" id="7_73lu8"]
+[ext_resource type="Texture2D" uid="uid://r5cpwlihphwm" path="res://assets/CutsceneAssets/BackgroundParralax/Cutscene Background parrallaxhill1.png" id="7_tccf1"]
 [ext_resource type="PackedScene" uid="uid://ckpln1b8qn78w" path="res://assets/CutsceneAssets/Zombie.tscn" id="9_73lu8"]
+[ext_resource type="Script" uid="uid://dqr050wikffa4" path="res://scripts/dialogue_line.gd.gd" id="10_ajdlv"]
+[ext_resource type="Texture2D" uid="uid://bvjf1mksamumj" path="res://assets/CutsceneAssets/Faces/client1-2.png.png" id="11_ktgd5"]
+[ext_resource type="PackedScene" uid="uid://duplhl8u5qmps" path="res://scenes/dialogue_box.tscn" id="11_pejgv"]
+[ext_resource type="PackedScene" uid="uid://cohgxfn4j821u" path="res://scenes/building.tscn" id="12_qf8jl"]
+
+[sub_resource type="Resource" id="Resource_0gg0b"]
+script = ExtResource("10_ajdlv")
+portrait = ExtResource("11_ktgd5")
+text = "Roads are qiueter now, more bodies than humans. I'd better check on the client, I'm late for the next cleanout."
+metadata/_custom_type_script = "uid://dqr050wikffa4"
+
+[sub_resource type="Resource" id="Resource_qf8jl"]
+script = ExtResource("2_gdwq0")
+lines = Array[ExtResource("10_ajdlv")]([SubResource("Resource_0gg0b")])
+zombie_count = 100
+background_textures = Array[Texture2D]([ExtResource("1_t5wr7"), ExtResource("2_q4ftq"), ExtResource("3_wo4kq"), ExtResource("4_t5wr7"), ExtResource("7_tccf1"), ExtResource("6_2fhnt"), ExtResource("7_73lu8"), null])
+metadata/_custom_type_script = "uid://c7bnpohbanxbv"
+
+[sub_resource type="Resource" id="Resource_ur7ip"]
+script = ExtResource("2_gdwq0")
+zombie_count = 2
+metadata/_custom_type_script = "uid://c7bnpohbanxbv"
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pxlae"]
+
+[sub_resource type="Animation" id="Animation_qf8jl"]
+resource_name = "Finale"
+length = 7.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"bring_in_building"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterBody2D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(4.0666666),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"pause_animation"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(6.9333334),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"finish_cutscene"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_73lu8"]
 length = 0.001
@@ -166,16 +236,33 @@ tracks/0/keys = {
 "method": &"spawn_road_zombie"
 }]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DialogueBox")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.96666664),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_all"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_73lu8"]
 _data = {
+&"Finale": SubResource("Animation_qf8jl"),
 &"RESET": SubResource("Animation_73lu8"),
 &"Start": SubResource("Animation_2fhnt"),
 &"ZombieAttack": SubResource("Animation_4pkki")
 }
 
-[node name="Cutscene" type="Node2D" unique_id=1093653990]
+[node name="Cutscene" type="Node2D" unique_id=1093653990 node_paths=PackedStringArray("background_layers")]
 script = ExtResource("1_4pkki")
+pre_level_table = Array[ExtResource("2_gdwq0")]([SubResource("Resource_qf8jl"), SubResource("Resource_ur7ip")])
+background_layers = [NodePath("Parallax/Parallax2D4"), NodePath("Parallax/Parallax2D3"), NodePath("Parallax/Parallax2D2"), NodePath("Parallax/Parallax2D"), NodePath("Parallax/Parallax2D5"), NodePath("Parallax/Parallax2D6"), NodePath("Parallax/Parallax2D7")]
 
 [node name="Parallax" type="Node2D" parent="." unique_id=39008634]
 
@@ -255,6 +342,9 @@ position = Vector2(0, -48)
 position = Vector2(0, 11)
 shape = SubResource("WorldBoundaryShape2D_pxlae")
 
+[node name="Building" parent="." unique_id=1798670169 instance=ExtResource("12_qf8jl")]
+position = Vector2(-5624, -415)
+
 [node name="CharacterBody2D" parent="." unique_id=274974302 instance=ExtResource("1_ae4jv")]
 position = Vector2(0, -87)
 
@@ -280,3 +370,6 @@ next/Start = &"ZombieAttack"
 
 [node name="Area2D2" parent="." unique_id=1853806185 instance=ExtResource("9_73lu8")]
 position = Vector2(3101, -114)
+
+[node name="DialogueBox" parent="." unique_id=920493074 instance=ExtResource("11_pejgv")]
+seconds_per_line = 7.0

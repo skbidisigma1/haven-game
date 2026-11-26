@@ -25,15 +25,20 @@ func _ready() -> void:
 	play.grab_focus()
 
 func _play() -> void:
-	GameState.current_level_index = 0
+	# Start at the first level not yet beaten.
+	var index := 0
 	for i in GameState.LEVELS.all().size():
 		if not GameState.best_shots.has(i):
-			GameState.current_level_index = i
+			index = i
 			break
-	get_tree().change_scene_to_file("res://main.tscn")
+	# Playing through from here: every level gets its cutscene first.
+	GameState.story_mode = true
+	GameState.go_to_level(index)
 
 func _levels() -> void:
-	get_tree().change_scene_to_file("res://scenes/level_select.tscn")
+	# Levels picked from Level Select skip the cutscenes.
+	GameState.story_mode = false
+	SceneTransition.change_scene("res://scenes/level_select.tscn")
 
 func _on_mute_changed(muted: bool) -> void:
 	sound_button.text = "Sound: off" if muted else "Sound: on"

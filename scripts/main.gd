@@ -3,6 +3,9 @@ class_name GameManager
 
 enum State { SPAWNING, PLANNING, FIRING, RESULT }
 const MAX_TRIES := 3
+# Where the laser gun sits, and which way it fires (90 = straight down).
+const GUN_POSITION := Vector2(64, 120)
+const GUN_ROTATION_DEGREES := 90.0
 # Seconds the laser waits after the last zombie is out before it fires.
 const ZOMBIE_REVEAL_DELAY := 1.0
 const LEVEL_DATA = preload("res://scripts/levels.gd")
@@ -55,7 +58,8 @@ func load_level(index: int) -> void:
 	active_platforms.clear()
 	last_laser_data.clear()
 	var data: Dictionary = levels[current_level_index]
-	laser_gun.position = Vector2(44, 160)
+	laser_gun.position = GUN_POSITION
+	laser_gun.rotation_degrees = GUN_ROTATION_DEGREES
 	for info in data["walls"]:
 		var wall: ObstacleWall = WALL.instantiate()
 		wall.position = info["pos"]
@@ -162,11 +166,18 @@ func _on_edit_placements_requested() -> void:
 func _on_reset_requested() -> void:
 	get_tree().paused = false
 	ui.paused = false
-	load_level(current_level_index)
+	# Reload the same level behind the line wipe.
+	SceneTransition.cover(func(): load_level(current_level_index))
 
 func _on_next_level_requested() -> void:
 	if current_level_index < levels.size() - 1:
-		load_level(current_level_index + 1)
+		if GameState.story_mode:
+			# Playing through from the start: show the next level's cutscene first.
+			generation += 1
+			GameState.go_to_level(current_level_index + 1)
+		else:
+			var next := current_level_index + 1
+			SceneTransition.cover(func(): load_level(next))
 	else:
 		_on_level_select_requested()
 
@@ -184,5 +195,7 @@ func _toggle_pause() -> void:
 
 func _on_level_select_requested() -> void:
 	generation += 1
+	# Leaving for Level Select ends the play-through.
+	GameState.story_mode = false
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://scenes/level_select.tscn")
+	SceneTransition.change_scene("res://scenes/level_select.tscn")

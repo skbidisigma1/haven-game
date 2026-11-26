@@ -30,4 +30,5 @@ func _ready() -> void:
 
 func _select(index: int) -> void:
 	GameState.current_level_index = index
-	get_tree().change_scene_to_file("res://main.tscn")
+	GameState.story_mode = false
+	GameState.go_to_level(index)

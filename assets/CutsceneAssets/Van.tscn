@@ -46,7 +46,7 @@ animations = [{
 script = ExtResource("1_mdunx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1077997951]
-z_index = 2
+z_index = 4
 position = Vector2(2.5, -118)
 shape = SubResource("RectangleShape2D_pxlae")
 
