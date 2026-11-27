@@ -18,6 +18,9 @@ func pause_animation():
 func resume_animation():
 	animated_sprite_2d.play()
 	
+func play_ending() -> void:
+	$AnimatedSprite2D.play("ending")
+	
 func _ready():
 	base_y = animated_sprite_2d.position.y
 

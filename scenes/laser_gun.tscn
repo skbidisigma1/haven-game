@@ -1,17 +1,24 @@
-[gd_scene load_steps=4 format=3]
-[ext_resource type="Script" path="res://scripts/laser_gun.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/sprites/emitter.png" id="2"]
+[gd_scene format=3 uid="uid://clskkk07cjb2n"]
+
+[ext_resource type="Script" uid="uid://bcok377jaikxv" path="res://scripts/laser_gun.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://dptle2haspojd" path="res://assets/sprites/emitter.png" id="2"]
+
 [sub_resource type="RectangleShape2D" id="Housing"]
 size = Vector2(56, 32)
-[node name="LaserGun" type="Node2D"]
+
+[node name="LaserGun" type="Node2D" unique_id=882786221]
 script = ExtResource("1")
-[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=603726764]
+z_index = 4
 texture = ExtResource("2")
 region_enabled = true
 region_rect = Rect2(0, 0, 64, 64)
-[node name="Muzzle" type="Marker2D" parent="."]
+
+[node name="Muzzle" type="Marker2D" parent="." unique_id=314133444]
 position = Vector2(36, 0)
 
-[node name="Housing" type="StaticBody2D" parent="."]
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Housing"]
+[node name="Housing" type="StaticBody2D" parent="." unique_id=1496123513]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Housing" unique_id=564330564]
 shape = SubResource("Housing")

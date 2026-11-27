@@ -4,7 +4,7 @@ class_name GameManager
 enum State { SPAWNING, PLANNING, FIRING, RESULT }
 const MAX_TRIES := 3
 # Where the laser gun sits, and which way it fires (90 = straight down).
-const GUN_POSITION := Vector2(64, 120)
+const GUN_POSITION := Vector2(576, 120)
 const GUN_ROTATION_DEGREES := 90.0
 # Seconds the laser waits after the last zombie is out before it fires.
 const ZOMBIE_REVEAL_DELAY := 1.0
@@ -71,6 +71,7 @@ func load_level(index: int) -> void:
 		optic.rotation_degrees = info["rot"]
 		optic.kind = info["kind"]
 		optic.fixed = info["fixed"]
+		optic.pivot = info.get("pivot", false)
 		optic.can_interact = false
 		level_container.add_child(optic)
 		active_platforms.append(optic)

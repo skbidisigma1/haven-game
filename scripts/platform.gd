@@ -5,6 +5,8 @@ signal platform_moved
 static var active_dragged_platform: Platform
 var kind: String = "mirror"
 var fixed: bool = false
+# A pivot is small, stays where the level puts it, and can only be turned (8 directions).
+var pivot: bool = false
 var can_interact: bool = true
 var is_dragging := false
 var is_hovered := false
@@ -15,11 +17,23 @@ var placement_area: Area2D
 const GRID: float = 8.0
 const ARENA := Rect2(18, 106, 1116, 500)
 
-# Art and grab shapes are set up in platform.tscn in the 2D view.
+# Size of the housing used for placement and grabbing (the beam uses the CollisionShape2Ds).
+@export var mirror_length: float = 104.0
+@export var pivot_length: float = 56.0
+const HOUSING_THICKNESS := 20.0
+
+# Art and shapes are set up in platform.tscn in the 2D view.
 @onready var mirror_sprite: Node2D = get_node_or_null("MirrorSprite")
 @onready var splitter_sprite: Node2D = get_node_or_null("SplitterSprite")
+@onready var pivot_sprite: Node2D = get_node_or_null("PivotSprite")
+@onready var pivot_splitter_sprite: Node2D = get_node_or_null("PivotSplitterSprite")
+# Art behind a pivot (a mount or bracket). Only shown on pivots, and it never turns.
+@onready var pivot_base: Node2D = get_node_or_null("PivotBase")
 @onready var splitter_grab: CollisionPolygon2D = get_node_or_null("SplitterGrab")
 @onready var fixed_marker: Node2D = get_node_or_null("FixedMarker")
+# The beam surfaces: the normal long one, and the short one used by pivots.
+@onready var mirror_shape: CollisionShape2D = get_node_or_null("CollisionShape2D")
+@onready var pivot_shape: CollisionShape2D = get_node_or_null("PivotShape")
 # A Line2D styled in the editor. The script only moves its two ends:
 # straight up from the platform to the ceiling, always vertical.
 @onready var rope: Line2D = get_node_or_null("Rope")
@@ -28,7 +42,7 @@ const ARENA := Rect2(18, 106, 1116, 500)
 
 func _ready() -> void:
 	add_to_group("reflectors")
-	footprint.size = Vector2(104, 20)
+	footprint.size = Vector2(_length(), HOUSING_THICKNESS)
 	# Beam geometry is a thin optical surface; placement uses its full housing.
 	placement_area = Area2D.new()
 	placement_area.collision_layer = 2
@@ -41,10 +55,16 @@ func _ready() -> void:
 	input_pickable = false
 	# The grab triangle is only for the mouse. It must never block the laser.
 	if splitter_grab: splitter_grab.disabled = true
+	# Only one beam surface is active: the short one for pivots, the long one otherwise.
+	if mirror_shape: mirror_shape.disabled = pivot
+	if pivot_shape: pivot_shape.disabled = not pivot
 	_update_look()
 
 func _exit_tree() -> void:
 	if active_dragged_platform == self: active_dragged_platform = null
+
+func _length() -> float:
+	return pivot_length if pivot else mirror_length
 
 func stop_drag() -> void:
 	is_dragging = false
@@ -54,7 +74,8 @@ func stop_drag() -> void:
 
 func placement_is_clear(at: Vector2, angle: float) -> bool:
 	var xform := Transform2D(angle, at)
-	for corner in [Vector2(-52, -10), Vector2(52, -10), Vector2(52, 10), Vector2(-52, 10)]:
+	var half := Vector2(_length() / 2.0, HOUSING_THICKNESS / 2.0)
+	for corner in [Vector2(-half.x, -half.y), Vector2(half.x, -half.y), Vector2(half.x, half.y), Vector2(-half.x, half.y)]:
 		if not ARENA.has_point(xform * corner): return false
 	var query := PhysicsShapeQueryParameters2D.new()
 	query.shape = footprint
@@ -77,7 +98,7 @@ func _physics_process(_delta: float) -> void:
 	if hovered != is_hovered:
 		is_hovered = hovered
 		_update_look()
-	if not can_interact or fixed:
+	if not can_interact or fixed or pivot:
 		if is_dragging: stop_drag()
 		return
 	if not is_dragging: return
@@ -115,7 +136,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		return
 	if event is InputEventMouseButton and event.pressed and under_pointer:
-		if event.button_index == MOUSE_BUTTON_RIGHT or (event.button_index == MOUSE_BUTTON_LEFT and event.double_click):
+		if pivot:
+			# Pivots can't be dragged: left-click turns them one way, right-click the other.
+			if event.button_index == MOUSE_BUTTON_LEFT:
+				rotate_platform(45)
+			elif event.button_index == MOUSE_BUTTON_RIGHT:
+				rotate_platform(-45)
+		elif event.button_index == MOUSE_BUTTON_RIGHT or (event.button_index == MOUSE_BUTTON_LEFT and event.double_click):
 			stop_drag()
 			rotate_platform(45)
 		elif event.button_index == MOUSE_BUTTON_LEFT and active_dragged_platform == null:
@@ -128,11 +155,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 # True if the point is over the part you can grab.
-# Splitters use the SplitterGrab triangle. Mirrors use a box.
+# Full-size splitters use the SplitterGrab triangle. Everything else uses a box sized to the platform.
 func _is_under(global_point: Vector2) -> bool:
-	if kind == "splitter" and splitter_grab:
+	if kind == "splitter" and not pivot and splitter_grab:
 		return Geometry2D.is_point_in_polygon(splitter_grab.to_local(global_point), splitter_grab.polygon)
-	return Rect2(-56, -14, 112, 28).has_point(to_local(global_point))
+	var half := _length() / 2.0 + 4.0
+	return Rect2(-half, -14, half * 2.0, 28).has_point(to_local(global_point))
 
 # Stretches the rope from the ceiling down to the middle of the platform.
 # Rounded to whole pixels so a pixel-art rope stays crisp.
@@ -147,12 +175,21 @@ func _update_rope() -> void:
 
 # Shows the right sprite and tints it. Draws nothing itself.
 func _update_look() -> void:
-	if mirror_sprite: mirror_sprite.visible = kind != "splitter"
-	if splitter_sprite: splitter_sprite.visible = kind == "splitter"
+	var is_splitter := kind == "splitter"
+	if mirror_sprite: mirror_sprite.visible = not pivot and not is_splitter
+	if splitter_sprite: splitter_sprite.visible = not pivot and is_splitter
+	if pivot_sprite: pivot_sprite.visible = pivot and (not is_splitter or pivot_splitter_sprite == null)
+	if pivot_splitter_sprite: pivot_splitter_sprite.visible = pivot and is_splitter
 	if fixed_marker: fixed_marker.visible = fixed
+	if pivot_base:
+		pivot_base.visible = pivot
+		# Cancel out the platform's rotation so the base always stays upright.
+		pivot_base.global_rotation = 0.0
+	# Pivots sit on their base instead of hanging from a rope.
+	if rope: rope.visible = not pivot
 	_update_rope()
 	if blocked:
-		modulate = Color("ed8a71")             # red-orange: can't place here
+		modulate = Color("ed8a71")             # red-orange: can't turn/place here
 	elif fixed:
 		modulate = Color(0.7, 0.7, 0.7)         # dimmer: locked, can't be moved
 	elif is_hovered:

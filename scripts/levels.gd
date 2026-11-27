@@ -2,9 +2,13 @@ extends RefCounted
 
 # Rotations describe the mirror's surface, not its normal.
 # The laser drops straight down from the top-left at x = 64.
-static func optic(x: float, y: float, angle: float, kind: String = "mirror", fixed: bool = false) -> Dictionary:
-	return {"pos": Vector2(x, y), "rot": angle, "kind": kind, "fixed": fixed}
+static func optic(x: float, y: float, angle: float, kind: String = "mirror", fixed: bool = false, is_pivot: bool = false) -> Dictionary:
+	return {"pos": Vector2(x, y), "rot": angle, "kind": kind, "fixed": fixed, "pivot": is_pivot}
 
+# A small mirror that stays put but can be turned. Use kind = "splitter" for a pivot splitter.
+static func pivot(x: float, y: float, angle: float, kind: String = "mirror") -> Dictionary:
+	return optic(x, y, angle, kind, false, true)
+		
 static func wall(x: float, y: float, w: float, h: float) -> Dictionary:
 	return {"pos": Vector2(x, y), "size": Vector2(w, h)}
 
@@ -12,17 +16,17 @@ static func all() -> Array[Dictionary]:
 	return [
 		{
 			"name": "Drop zone", "hint": "The beam falls from the top-left. One mirror turns it across the room.",
-			"optics": [optic(960, 576, 0)],
+			"optics": [optic(960, 400, 0)],
 			"solution": [optic(64, 448, 45)],
-			"zombies": [Vector2(64, 224), Vector2(400, 448), Vector2(832, 448)],
-			"humans": [Vector2(64, 544)], "walls": [],
+			"zombies": [Vector2(400, 300)],
+			"humans": [Vector2(576, 544)], "walls": [],
 		},
 		{
 			"name": "Shaft blocked", "hint": "A researcher is standing in the shaft. Turn early, then turn again.",
 			"optics": [optic(832, 576, 0), optic(960, 576, 0)],
 			"solution": [optic(64, 288, 45), optic(1088, 288, 45)],
 			"zombies": [Vector2(64, 192), Vector2(608, 288), Vector2(1088, 480)],
-			"humans": [Vector2(64, 400), Vector2(608, 480)], "walls": [],
+			"humans": [Vector2(608, 480)], "walls": [],
 		},
 		{
 			"name": "Long way up", "hint": "Go low first, then climb. Mind which way you turn at the top.",

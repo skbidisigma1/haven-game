@@ -15,7 +15,12 @@
 [ext_resource type="Script" uid="uid://dqr050wikffa4" path="res://scripts/dialogue_line.gd.gd" id="10_ajdlv"]
 [ext_resource type="Texture2D" uid="uid://bvjf1mksamumj" path="res://assets/CutsceneAssets/Faces/client1-2.png.png" id="11_ktgd5"]
 [ext_resource type="PackedScene" uid="uid://duplhl8u5qmps" path="res://scenes/dialogue_box.tscn" id="11_pejgv"]
+[ext_resource type="Texture2D" uid="uid://b7x8xtv13pvmf" path="res://assets/CutsceneAssets/Faces/client12-3.png.png" id="12_2gool"]
 [ext_resource type="PackedScene" uid="uid://cohgxfn4j821u" path="res://scenes/building.tscn" id="12_qf8jl"]
+[ext_resource type="Texture2D" uid="uid://dfkt0nar3tjmf" path="res://assets/CutsceneAssets/BackgroundParralax/greensky/gs2-1.png.png" id="12_ur7ip"]
+[ext_resource type="Texture2D" uid="uid://dgod4qj4g6m7t" path="res://assets/CutsceneAssets/BackgroundParralax/greensky/greensky-1.png (2).png" id="13_2gool"]
+[ext_resource type="Texture2D" uid="uid://dpb0jrqiycqj1" path="res://assets/CutsceneAssets/BackgroundParralax/greensky/greensky-1.png (1).png" id="14_jarvi"]
+[ext_resource type="Texture2D" uid="uid://bcqx0n4sb4q06" path="res://assets/CutsceneAssets/BackgroundParralax/greensky/greensky-1.png.png" id="15_i7f1s"]
 
 [sub_resource type="Resource" id="Resource_0gg0b"]
 script = ExtResource("10_ajdlv")
@@ -23,23 +28,37 @@ portrait = ExtResource("11_ktgd5")
 text = "Roads are qiueter now, more bodies than humans. I'd better check on the client, I'm late for the next cleanout."
 metadata/_custom_type_script = "uid://dqr050wikffa4"
 
+[sub_resource type="Resource" id="Resource_ktgd5"]
+script = ExtResource("10_ajdlv")
+portrait = ExtResource("12_2gool")
+text = "fzz... shzt...  Who the!? Oh, executive filth janitor. I have 7 researchers currently trapped in the building you were supposed to clean an hour ago! Do not test my patience."
+metadata/_custom_type_script = "uid://dqr050wikffa4"
+
+[sub_resource type="Resource" id="Resource_ur7ip"]
+script = ExtResource("10_ajdlv")
+portrait = ExtResource("11_ktgd5")
+text = "Yada Yada I can barely hear you through that stuck up mask, your researchers can wait. I ran into... traffic en route, be there shortly"
+metadata/_custom_type_script = "uid://dqr050wikffa4"
+
 [sub_resource type="Resource" id="Resource_qf8jl"]
 script = ExtResource("2_gdwq0")
-lines = Array[ExtResource("10_ajdlv")]([SubResource("Resource_0gg0b")])
+lines = Array[ExtResource("10_ajdlv")]([SubResource("Resource_0gg0b"), SubResource("Resource_ktgd5"), SubResource("Resource_ur7ip")])
 zombie_count = 100
+zombie_distance_max = 50000.0
 background_textures = Array[Texture2D]([ExtResource("1_t5wr7"), ExtResource("2_q4ftq"), ExtResource("3_wo4kq"), ExtResource("4_t5wr7"), ExtResource("7_tccf1"), ExtResource("6_2fhnt"), ExtResource("7_73lu8"), null])
 metadata/_custom_type_script = "uid://c7bnpohbanxbv"
 
-[sub_resource type="Resource" id="Resource_ur7ip"]
+[sub_resource type="Resource" id="Resource_jarvi"]
 script = ExtResource("2_gdwq0")
 zombie_count = 2
+background_textures = Array[Texture2D]([ExtResource("12_ur7ip"), ExtResource("13_2gool"), ExtResource("14_jarvi"), ExtResource("15_i7f1s"), null])
 metadata/_custom_type_script = "uid://c7bnpohbanxbv"
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pxlae"]
 
 [sub_resource type="Animation" id="Animation_qf8jl"]
 resource_name = "Finale"
-length = 7.0
+length = 7.8
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -75,11 +94,25 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(6.9333334),
+"times": PackedFloat32Array(7.633333),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"finish_cutscene"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CharacterBody2D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(4.866667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_ending"
 }]
 }
 
@@ -261,14 +294,14 @@ _data = {
 
 [node name="Cutscene" type="Node2D" unique_id=1093653990 node_paths=PackedStringArray("background_layers")]
 script = ExtResource("1_4pkki")
-pre_level_table = Array[ExtResource("2_gdwq0")]([SubResource("Resource_qf8jl"), SubResource("Resource_ur7ip")])
+pre_level_table = Array[ExtResource("2_gdwq0")]([SubResource("Resource_qf8jl"), SubResource("Resource_jarvi")])
 background_layers = [NodePath("Parallax/Parallax2D4"), NodePath("Parallax/Parallax2D3"), NodePath("Parallax/Parallax2D2"), NodePath("Parallax/Parallax2D"), NodePath("Parallax/Parallax2D5"), NodePath("Parallax/Parallax2D6"), NodePath("Parallax/Parallax2D7")]
 
 [node name="Parallax" type="Node2D" parent="." unique_id=39008634]
 
 [node name="Parallax2D4" type="Parallax2D" parent="Parallax" unique_id=677390036]
 texture_filter = 1
-scroll_scale = Vector2(0, 1)
+scroll_scale = Vector2(0.07, 1)
 scroll_offset = Vector2(0, -291)
 repeat_size = Vector2(3840, 0)
 
@@ -372,4 +405,5 @@ next/Start = &"ZombieAttack"
 position = Vector2(3101, -114)
 
 [node name="DialogueBox" parent="." unique_id=920493074 instance=ExtResource("11_pejgv")]
+lines = Array[ExtResource("10_ajdlv")]([])
 seconds_per_line = 7.0
